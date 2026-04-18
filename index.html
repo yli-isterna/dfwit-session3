@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DFWIT Sr Cohort Session #3 — April 18, 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #f5f6fa;
+    color: #2d3436;
+    line-height: 1.6;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  .header {
+    background: linear-gradient(135deg, #12203a 0%, #1e3a5f 100%);
+    color: #fff;
+    padding: 40px 36px 32px;
+  }
+
+  .header .org {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #f2e782;
+    margin-bottom: 8px;
+  }
+
+  .header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .header .theme {
+    font-size: 16px;
+    font-weight: 300;
+    color: #c5c8d7;
+    margin-bottom: 20px;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 14px;
+    color: #c5c8d7;
+  }
+
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .meta-item .icon {
+    font-size: 16px;
+  }
+
+  .body {
+    padding: 32px 36px 40px;
+  }
+
+  .block {
+    margin-bottom: 28px;
+    border-left: 3px solid #e8e8e8;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .block::before {
+    content: attr(data-time);
+    position: absolute;
+    left: -56px;
+    top: 2px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #999;
+    width: 44px;
+    text-align: right;
+  }
+
+  .block.active {
+    border-left-color: #f2e782;
+  }
+
+  .block-header {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .block-number {
+    font-size: 11px;
+    font-weight: 700;
+    color: #fff;
+    background: #12203a;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .block-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #12203a;
+  }
+
+  .block-duration {
+    font-size: 12px;
+    font-weight: 500;
+    color: #999;
+    background: #f5f6fa;
+    padding: 2px 8px;
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+
+  .block-content {
+    font-size: 14px;
+    color: #555;
+    margin-top: 4px;
+  }
+
+  .block-content ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .block-content li {
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .block-content li::before {
+    content: ">";
+    position: absolute;
+    left: 0;
+    color: #f2c882;
+    font-weight: 700;
+  }
+
+  .block-content .highlight {
+    background: linear-gradient(120deg, #fef9e7 0%, #fef3cd 100%);
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin: 8px 0;
+    font-size: 13px;
+    color: #444;
+    border-left: 3px solid #f2c882;
+  }
+
+  .block-content a {
+    color: #1e3a5f;
+    text-decoration: underline;
+    text-decoration-color: #f2e782;
+    text-underline-offset: 2px;
+  }
+
+  .resources {
+    background: #f5f6fa;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-top: 8px;
+  }
+
+  .resources h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #12203a;
+    margin-bottom: 10px;
+  }
+
+  .resources ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .resources li {
+    font-size: 13px;
+    color: #555;
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .resources li::before {
+    content: "~";
+    position: absolute;
+    left: 0;
+    color: #999;
+    font-weight: 700;
+  }
+
+  .resources a {
+    color: #1e3a5f;
+    text-decoration: underline;
+    text-decoration-color: #ddd;
+    text-underline-offset: 2px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 20px 36px 28px;
+    font-size: 12px;
+    color: #bbb;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  .footer .logo-text {
+    font-weight: 600;
+    color: #12203a;
+    font-size: 13px;
+    letter-spacing: 1px;
+  }
+
+  @media (max-width: 720px) {
+    body { padding: 10px; }
+    .header { padding: 28px 24px 24px; }
+    .header h1 { font-size: 22px; }
+    .body { padding: 24px 24px 32px; }
+    .block::before { display: none; }
+    .block { margin-left: 0; }
+    .meta { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="org">DFWIT Mentorship Program 2026</div>
+    <h1>Senior Cohort — Session #3</h1>
+    <div class="theme">AI Reality Check + Accountability</div>
+    <div class="meta">
+      <div class="meta-item"><span class="icon">&#128197;</span> Friday, April 18, 2026</div>
+      <div class="meta-item"><span class="icon">&#128336;</span> 1:00 – 2:30 PM CT</div>
+      <div class="meta-item"><span class="icon">&#128205;</span> Zoom</div>
+      <div class="meta-item"><span class="icon">&#9202;</span> 90 minutes</div>
+    </div>
+  </div>
+
+  <div class="body" style="padding-left: 90px;">
+
+    <div class="block" data-time="1:00">
+      <div class="block-header">
+        <span class="block-number">1</span>
+        <span class="block-title">Check-in Pulse</span>
+        <span class="block-duration">10 min</span>
+      </div>
+      <div class="block-content">
+        <ul>
+          <li>One sentence each: <em>"What's changed in your career thinking since we last met?"</em></li>
+          <li>Quick round-robin — everyone speaks before we go deep</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block" data-time="1:10">
+      <div class="block-header">
+        <span class="block-number">2</span>
+        <span class="block-title">The AI Shift Is Real</span>
+        <span class="block-duration">25 min</span>
+      </div>
+      <div class="block-content">
+        <ul>
+          <li><strong>Go Bu's AT&T Story</strong> — Agentic call center (CCAA): drastic efficiency gains, innovation award. "Service-as-Software" in action.</li>
+          <li><strong>"Service-as-Software"</strong> — The inversion of SaaS. AI delivers outcomes, not features. What does this mean for your career?</li>
+          <li><strong>"You're Not Talking to a Model — You're Talking to a Harness"</strong> — The 6 components that actually determine AI quality: context, memory, tools, skills, harness, agent.</li>
+        </ul>
+        <div class="highlight">
+          Read: <a href="https://www.aisterna.com/post/you-re-not-talking-to-a-model-you-re-talking-to-a-harness" target="_blank">You're Not Talking to a Model — You're Talking to a Harness</a>
+        </div>
+        <ul>
+          <li><strong>Discussion:</strong> <em>"When you evaluate AI tools at work, what do you actually look at? What would you look at differently now?"</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block" data-time="1:35">
+      <div class="block-header">
+        <span class="block-number">3</span>
+        <span class="block-title">T-bar &rarr; Multi-Leg Career</span>
+        <span class="block-duration">15 min</span>
+      </div>
+      <div class="block-content">
+        <ul>
+          <li>Single-depth T is risky in the AI era — you need <strong>more legs</strong></li>
+          <li>Examples: AI fluency, systems thinking, security awareness, leadership pipeline development</li>
+        </ul>
+        <div class="highlight">
+          "As AI makes knowledge cheaper and skills easier to acquire, the differentiator becomes: who can unlock their potential and eliminate distractions."<br>
+          <span style="font-size:12px; color:#888;">— 为什么十倍增长比二倍容易 (10x Is Easier Than 2x), shared by Liu Chao</span>
+        </div>
+        <ul>
+          <li><strong>Lucy Smith's Security Seminar callback</strong> — AI security as a T-bar "leg." Sylvia made the connection happen. <em>"What's one thing from Lucy's session that changed how you think about your own work?"</em></li>
+          <li><strong>DFWIT as a vehicle</strong> — competition, master classes, this cohort: how you build the extra legs</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block" data-time="1:50">
+      <div class="block-header">
+        <span class="block-number">4</span>
+        <span class="block-title">Action Plan Accountability</span>
+        <span class="block-duration">25 min</span>
+      </div>
+      <div class="block-content">
+        <ul>
+          <li><strong>Chat Drop</strong> (3 min) — Everyone types in Zoom chat at the same time: <em>"The one action on my 90-day plan I'm least confident I'll actually do — and why."</em></li>
+          <li><strong>Pattern Read</strong> (5 min) — Yanbing reads back the common themes from chat. Where are we collectively stuck?</li>
+          <li><strong>Group Discussion</strong> (17 min) — Dig into the patterns. Push for specifics. Connect dots across the group. <em>"Who wrote down something bold? Something that scares you a little?"</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block" data-time="2:15">
+      <div class="block-header">
+        <span class="block-number">5</span>
+        <span class="block-title">Open Forum</span>
+        <span class="block-duration">10 min</span>
+      </div>
+      <div class="block-content">
+        <ul>
+          <li>AI hallucinations, security follow-ups, anything on your mind</li>
+          <li>Shout-out: Chun posted the group's podcast recommendations to the <a href="https://dfwit.circle.so/c/2026-mentorship-program/podcasts-shared-in-our-chat-today" target="_blank">DFWIT Circle forum</a> — keep sharing there!</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="block" data-time="2:25">
+      <div class="block-header">
+        <span class="block-number">6</span>
+        <span class="block-title">Close + Next Steps</span>
+        <span class="block-duration">5 min</span>
+      </div>
+      <div class="block-content">
+        <ul>
+          <li>Pick an <strong>accountability partner</strong> — exchange contacts, set a check-in date, say it out loud</li>
+          <li>Homework: one accountability call before next session</li>
+        </ul>
+        <div class="highlight" style="border-left-color: #12203a;">
+          "You've been sharing podcasts, challenging each other's thinking, bringing in speakers. That's not a class — that's a community. Let's make sure the career actions get the same momentum."
+        </div>
+      </div>
+    </div>
+
+    <div class="resources">
+      <h3>Resources &amp; Pre-reads</h3>
+      <ul>
+        <li><a href="https://www.aisterna.com/post/you-re-not-talking-to-a-model-you-re-talking-to-a-harness" target="_blank">You're Not Talking to a Model — You're Talking to a Harness</a> (Yanbing Li)</li>
+        <li><a href="https://dfwit.circle.so/c/2026-mentorship-program/podcasts-shared-in-our-chat-today" target="_blank">Podcasts Shared in Our Chat</a> — curated by Chun on DFWIT Circle</li>
+        <li>Bring your 90-day action plan (from Session #2)</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="logo-text">DFWIT</div>
+    Dallas-Fort Worth IT Professionals &middot; Mentorship Program 2026
+  </div>
+
+</div>
+</body>
+</html>
